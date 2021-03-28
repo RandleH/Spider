@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E3A372A2260F72820061584D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3A372A1260F72820061584D /* main.cpp */; };
-		E3A372AC260F72B40061584D /* RH_neuron.cc in Sources */ = {isa = PBXBuildFile; fileRef = E3A372AB260F72B40061584D /* RH_neuron.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,10 +23,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E39217182610DAB600235AA6 /* RH_neuron.inl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = RH_neuron.inl.hpp; path = ../core/RH_neuron.inl.hpp; sourceTree = "<group>"; };
 		E3A3729E260F72820061584D /* Xcode_12 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Xcode_12; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A372A1260F72820061584D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E3A372AA260F72B40061584D /* RH_neuron.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RH_neuron.hpp; path = ../core/RH_neuron.hpp; sourceTree = "<group>"; };
-		E3A372AB260F72B40061584D /* RH_neuron.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RH_neuron.cc; path = ../core/RH_neuron.cc; sourceTree = "<group>"; };
 		E3A372AE260F7BFA0061584D /* RH_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RH_common.hpp; path = ../core/RH_common.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,9 +69,9 @@
 		E3A372A9260F72960061584D /* Spider */ = {
 			isa = PBXGroup;
 			children = (
-				E3A372AE260F7BFA0061584D /* RH_common.hpp */,
-				E3A372AB260F72B40061584D /* RH_neuron.cc */,
 				E3A372AA260F72B40061584D /* RH_neuron.hpp */,
+				E39217182610DAB600235AA6 /* RH_neuron.inl.hpp */,
+				E3A372AE260F7BFA0061584D /* RH_common.hpp */,
 			);
 			name = Spider;
 			sourceTree = "<group>";
@@ -133,7 +132,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3A372AC260F72B40061584D /* RH_neuron.cc in Sources */,
 				E3A372A2260F72820061584D /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
