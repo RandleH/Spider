@@ -7,8 +7,6 @@
 
 #include "RH_common.hpp"
 
-using namespace std;
-
 typedef enum{
     kNeuronActFunc_step      ,
     kNeuronActFunc_sigmold   ,
@@ -20,11 +18,11 @@ typedef enum{
 }E_NeuronActFunc_t;
 
 template<class D, class W, class B>
-static D  actFunc_step( vector<D>& x, vector<W>& w, B b ){
+static D  actFunc_step    ( std::vector<D>& x, std::vector<W>& w, B b ){
     D result = 0;
 
-    typename vector<D>::iterator iter_x = x.begin();
-    typename vector<W>::iterator iter_w = w.begin();
+    typename std::vector<D>::iterator iter_x = x.begin();
+    typename std::vector<W>::iterator iter_w = w.begin();
     for( ; iter_x != x.end(); iter_x++ ){
         result += (*iter_w)*(*iter_x);
     }
@@ -34,11 +32,11 @@ static D  actFunc_step( vector<D>& x, vector<W>& w, B b ){
 }
 
 template<class D, class W, class B>
-static D  actFunc_sigmold( vector<D>& x, vector<W>& w, B b ){
+static D  actFunc_sigmold ( std::vector<D>& x, std::vector<W>& w, B b ){
     D result = 0;
 
-    typename vector<D>::iterator iter_x = x.begin();
-    typename vector<W>::iterator iter_w = w.begin();
+    typename std::vector<D>::iterator iter_x = x.begin();
+    typename std::vector<W>::iterator iter_w = w.begin();
     for( ; iter_x != x.end(); iter_x++ ){
         result += (*iter_w)*(*iter_x);
     }
@@ -46,12 +44,6 @@ static D  actFunc_sigmold( vector<D>& x, vector<W>& w, B b ){
     
     return (D)((1.0)/(1.0+exp(-result))) ;
 }
-
-//template<class D, class W, class B>
-//static D (*aFunc[])( vector<D>& x, vector<W>& w, B b ) = {
-//    actFunc_step    ,
-//    actFunc_sigmold
-//};
 
 /*==============================================================================================
  > Data Structure: Input Cell
@@ -63,10 +55,11 @@ private:
     D     out;
     W     coe;
 public:
+    InputCell<D,W>     ( void       );
     InputCell<D,W>     ( D     data , W  coe );
     ~InputCell<D,W>    ( void       );
     
-    void  setAmplify   ( W     coe  );
+    void  gain         ( W     coe  );
     
     void  input        ( D     data );
     D     run          ( void       );
@@ -79,24 +72,24 @@ public:
 template<class D, class W, class B>
 class HiddenCell {
 private:
-    vector<D>    data_in;
-    vector<W>    weight;
+    std::vector<D>    data_in;
+    std::vector<W>    weight;
     B            bias;
     D            out;
-    D            (*aFunc)( vector<D>& x, vector<W>& w, B b );
+    D            (*aFunc)( std::vector<D>& x, std::vector<W>& w, B b );
 public:
-    HiddenCell       ( void           ){}
-    HiddenCell       ( vector<D>& data, vector<W>& weight, B bias );
-    ~HiddenCell      ( void           ){}
+    HiddenCell       ( void                 ){}
+    HiddenCell       ( std::vector<D>& data, std::vector<W>& weight, B bias );
+    ~HiddenCell      ( void                 ){}
     
-    void  setWeight  ( W          weight , int index );
-    void  setWeight  ( vector<W>& weight );
-    void  setBias    ( B          bias   );
+    void  setWeight  ( W               weight , int index );
+    void  setWeight  ( std::vector<W>& weight );
+    void  setBias    ( B               bias   );
     
-    void  setActFunc ( D (*aFunc)( vector<D>& x, vector<W>& w, B b ) );
+    void  setActFunc ( D (*aFunc)( std::vector<D>& x, std::vector<W>& w, B b ) );
     void  setActFunc ( E_NeuronActFunc_t func      );
     
-    void  input      ( vector<D>& data );
+    void  input      ( std::vector<D>& data );
     D     run        ( void   );
     D     output     ( void   );
 };
@@ -107,19 +100,19 @@ public:
 template<class D, class W, class B>
 class OutputCell {
 private:
-    vector<D>    data_in;
-    vector<W>    weight;
+    std::vector<D>    data_in;
+    std::vector<W>    weight;
     B            bias;
     D            out;
 public:
-    OutputCell       ( vector<D>& data, vector<W>& weight, B bias );
-    ~OutputCell      ( void           );
+    OutputCell       ( std::vector<D>& data, std:: vector<W>& weight, B bias );
+    ~OutputCell      ( void                );
     
-    void  setWeight  ( W          weight , int index );
-    void  setWeight  ( vector<W>& weight );
-    void  setBias    ( B          bias   );
+    void  setWeight  ( W               weight , int index );
+    void  setWeight  ( std::vector<W>& weight );
+    void  setBias    ( B               bias   );
     
-    void  input      ( vector<D>& data );
+    void  input      ( std::vector<D>& data );
     D     run        ( void   );
     D     output     ( void   );
 };

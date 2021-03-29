@@ -8,6 +8,12 @@
  > Data Structure: Input Cell
 ==============================================================================================*/
 template<typename D, typename W>  inline
+InputCell<D,W>::InputCell          ( void ){
+#ifdef RH_DEBUG
+#endif
+}
+
+template<typename D, typename W>  inline
 InputCell<D,W>::InputCell          ( D     data , W  coe ){
 #ifdef RH_DEBUG
 #endif
@@ -23,7 +29,7 @@ InputCell<D,W>::~InputCell         ( void       ){
 
 
 template<typename D, typename W>  inline
-void  InputCell<D,W>::setAmplify   ( W     coe  ){
+void  InputCell<D,W>::gain         ( W     coe  ){
 #ifdef RH_DEBUG
 #endif
     this->coe = coe;
@@ -58,19 +64,19 @@ D     InputCell<D,W>::output       ( void       ){
  > Data Structure: Hidden Cell
 ==============================================================================================*/
 template<typename D, typename W, typename B>  inline
-HiddenCell<D,W,B>::HiddenCell       ( vector<D>& data, vector<W>& weight, B bias ){
+HiddenCell<D,W,B>::HiddenCell       ( std::vector<D>& data, std::vector<W>& weight, B bias ){
     this->data_in.assign( data.begin(), data.end() );
     this->weight.assign( weight.begin(), weight.end() );
     this->bias = bias;
 }
 
 template<typename D, typename W, typename B>  inline
-void  HiddenCell<D,W,B>::setWeight  ( W          weight , int index ){
+void  HiddenCell<D,W,B>::setWeight  ( W               weight , int index ){
     this->weight[ index ] = weight;
 }
 
 template<typename D, typename W, typename B>  inline
-void  HiddenCell<D,W,B>::setWeight  ( vector<W>& weight ){
+void  HiddenCell<D,W,B>::setWeight  ( std::vector<W>& weight ){
     this->weight.assign( weight.begin(), weight.end() );
 }
 
@@ -80,7 +86,7 @@ void  HiddenCell<D,W,B>::setBias    ( B          bias   ){
 }
 
 template<typename D, typename W, typename B>  inline
-void  HiddenCell<D,W,B>::setActFunc ( D (*aFunc)( vector<D>& x, vector<W>& w, B b ) ){
+void  HiddenCell<D,W,B>::setActFunc ( D (*aFunc)( std::vector<D>& x, std::vector<W>& w, B b ) ){
 #ifdef RH_DEBUG
     ASSERT( aFunc );
 #endif
@@ -106,7 +112,7 @@ void  HiddenCell<D,W,B>::setActFunc ( E_NeuronActFunc_t func      ){
 }
 
 template<typename D, typename W, typename B>  inline
-void  HiddenCell<D,W,B>::input      ( vector<D>& data ){
+void  HiddenCell<D,W,B>::input      ( std::vector<D>& data ){
 #ifdef RH_DEBUG
 
 #endif
@@ -127,6 +133,9 @@ template<typename D, typename W, typename B>  inline
 D     HiddenCell<D,W,B>::output     ( void   ){
     return this->out;
 }
+
+
+
 
 
 #endif
